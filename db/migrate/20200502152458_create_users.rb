@@ -10,6 +10,7 @@ class CreateUsers < ActiveRecord::Migration[5.0]
       t.string :uid
       t.string :email_provider
       t.string :nylas_token
+      t.string :nylas_account_id
 
       t.timestamps
     end

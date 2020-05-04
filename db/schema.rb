@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 20200502152540) do
     t.string   "uid"
     t.string   "email_provider"
     t.string   "nylas_token"
+    t.string   "nylas_account_id"
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
   end

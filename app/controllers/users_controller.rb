@@ -63,11 +63,7 @@ class UsersController < ApplicationController
   end
 
   def connect_nylas(auth_hash, user)
-    api = Nylas::API.new(
-      app_id: ENV['NYLAS_APP_ID'],
-      app_secret: ENV['NYLAS_APP_SECRET']
-    )
-    nylas_token = api.authenticate(
+    nylas_token = nylas.authenticate(
         name: auth_hash[:info][:name],
         email_address: auth_hash[:info][:email],
         provider: :gmail,
@@ -78,7 +74,8 @@ class UsersController < ApplicationController
         },
         scopes: 'email.read_only'
       )
-    user.update_attributes(nylas_token: nylas_token ) if nylas_token.present?
+    # nylas_account_id
+    user.update_attributes(nylas_token: nylas_token, nylas_account_id: nylas(nylas_token).current_account.id) if nylas_token.present?
   end
 
   # DELETE /users/1
@@ -96,8 +93,20 @@ class UsersController < ApplicationController
   end
 
   def disconnect_callback
-    binding.pry
+    user = User.find(params[:user_id])
+    if user.present?
+      begin
+        nylas.revoke(user.nylas_token)
+        account = nylas.accounts.find(user.nylas_account_id)
+        account.downgrade
+        user.destroy
+      rescue Exception => e
+        puts "has some error #{e}"
+      end
+    end
+    redirect_to root_path
   end
+
 
   def login_callback
     binding.pry
@@ -105,6 +114,15 @@ class UsersController < ApplicationController
 
 
   private
+
+    def nylas(nylas_token = nil)
+      Nylas::API.new(
+        app_id: ENV['NYLAS_APP_ID'],
+        app_secret: ENV['NYLAS_APP_SECRET'],
+        access_token: nylas_token
+      )
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = User.find(params[:id])
