@@ -1,0 +1,55 @@
+<%= form_for @mail, :html => { :class => "form-horizontal mail" } do |f| %>
+
+  <% if @mail.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@mail.errors.count, "error") %> prohibited this mail from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @mail.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :mail_id, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :mail_id, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:mail_id) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :raw_email, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :raw_email, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:raw_email) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :from, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :from, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:from) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :mail_date, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :mail_date, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:mail_date) %>
+  </div>
+
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-10">
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                mails_path, :class => 'btn btn-default' %>
+    </div>
+  </div>
+
+<% end %>

@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  image: MyString
+  email: MyString
+  connected_email: MyString
+  refresh_token: MyString
+  email_connection_date: 2020-05-02 20:54:58
+  uid: MyString
+  email_provider: MyString
+
+two:
+  name: MyString
+  image: MyString
+  email: MyString
+  connected_email: MyString
+  refresh_token: MyString
+  email_connection_date: 2020-05-02 20:54:58
+  uid: MyString
+  email_provider: MyString

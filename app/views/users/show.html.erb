@@ -1,0 +1,78 @@
+<div class="row">
+  <div class="col-md-offset-2 col-md-8 col-lg-offset-3 col-lg-6">
+    <% if  @user %>
+        <div class="well profile">
+          <div class="col-sm-12">
+              <div class="col-xs-12 col-sm-8">
+                  <h2><%= @user.name %></h2>
+                  <p><strong>Email: </strong> <%= @user.email%>  </p>
+                  <p><strong>Email provider: </strong> <%= @user.email_provider%></p>
+                  <p><strong>UID: </strong> <%= @user.uid%></p>
+                  <p><strong>Refresh Token: </strong> <%= @user.refresh_token%></p>
+                  <p><strong> Connection Date: </strong> <%=  Date.strptime(@user.email_connection_date.to_s)%></p>
+              </div>
+              <div class="col-xs-12 col-sm-4 text-center">
+                  <figure>
+                      <% if  @user.image %>
+                        <img src="<%= @user.image%>" alt="rdc-ck" class="img-circle img-responsive" />
+                      <% else %>
+                        <img src="<%= image_url("5631356-background-image.png") %>" alt="rdc-ck" class="img-circle img-responsive" />
+                      <% end %>
+                  </figure>
+              </div>
+          </div>
+          <div class="col-xs-12 divider text-center">
+              <div class="col-xs-12 col-sm-4 emphasis">
+                  <p><small> </small></p>
+                  <%= link_to 'Mail Details', user_mail_details_path(@user.id), class: "btn btn-info btn-block", style: 'color: #ffff;' %>
+              </div>
+              <div class="col-xs-12 col-sm-4 emphasis">
+                  <p><small> </small></p>
+                  <%= link_to 'Sync Mail', user_mail_details_path(@user.id), class: "btn btn-info btn-block", style: 'color: #ffff;' %>
+              </div>
+              <div class="col-xs-12 col-sm-4 emphasis">
+                  <p><small> </small></p>
+                  <%= link_to 'Disconnect Mail', user_mail_details_path(@user.id), class: "btn btn-info btn-block", style: 'color: #ffff;' %>
+              </div>
+          </div>
+        </div>
+      <% else %>
+          <div class="emphasis">
+              <p><small> </small></p>
+              <%= link_to 'Disconnect Mail', user_mail_details_path(@user.id), class: "btn btn-info btn-block", style: 'color: #ffff;' %>
+          </div>
+      <% end %>
+
+  </div>
+</div>
+
+
+
+<!-- <dl class="dl-horizontal">
+  <dt><strong><%#= model_class.human_attribute_name(:name) %>:</strong></dt>
+  <dd><%#= @user.name %></dd>
+  <dt><strong><%#= model_class.human_attribute_name(:image) %>:</strong></dt>
+  <dd><%#= @user.image %></dd>
+  <dt><strong><%#= model_class.human_attribute_name(:email) %>:</strong></dt>
+  <dd><%#= @user.email %></dd>
+  <dt><strong><%#= model_class.human_attribute_name(:connected_email) %>:</strong></dt>
+  <dd><%#= @user.connected_email %></dd>
+  <dt><strong><%#= model_class.human_attribute_name(:refresh_token) %>:</strong></dt>
+  <dd><%#= @user.refresh_token %></dd>
+  <dt><strong><%#= model_class.human_attribute_name(:email_connection_date) %>:</strong></dt>
+  <dd><%#= @user.email_connection_date %></dd>
+  <dt><strong><%#= model_class.human_attribute_name(:uid) %>:</strong></dt>
+  <dd><%#= @user.uid %></dd>
+  <dt><strong><%#= model_class.human_attribute_name(:email_provider) %>:</strong></dt>
+  <dd><%#= @user.email_provider %></dd>
+</dl> -->
+
+<%#= link_to t('.back', :default => t("helpers.links.back")),
+              users_path, :class => 'btn btn-default'  %>
+<%#= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_user_path(@user), :class => 'btn btn-default' %>
+<%#= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              user_path(@user),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>

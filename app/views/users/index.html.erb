@@ -1,0 +1,45 @@
+<% if @users %>
+  <%- model_class = User -%>
+  <div class="page-header">
+    <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %>
+    <%= link_to 'Connect Mail', '/auth/google', class: "btn btn-info pull-right", style: 'color: #ffff;' %>
+    <%#= link_to t('.new', :default => t("helpers.links.new")),
+              new_user_path,
+              :class => 'btn btn-primary pull-right' %>
+    </h1>
+  </div>
+  <table class="table table-striped text-nowrap text-truncate ">
+    <thead class="thead-dark">
+      <tr>
+        <th><%= model_class.human_attribute_name(:id) %></th>
+        <th><%= model_class.human_attribute_name(:name) %></th>
+        <th><%= model_class.human_attribute_name(:image) %></th>
+        <th><%= model_class.human_attribute_name(:provider) %></th>
+        <th><%= model_class.human_attribute_name(:email) %></th>
+        <th><%=t '.actions', :default => t("helpers.actions") %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td><%= link_to user.id, user_path(user) %></td>
+          <td><%= user.name %></td>
+          <td>
+              <img src="<%= user.image%>" alt="rdc-ck" class="img-circle img-responsive" style= "max-width: 70px;" />
+          </td>
+          <td><%= user.email_provider %></td>
+          <td><%= user.email %></td>
+          <td>
+            <%= link_to t('.show', :default => t("helpers.links.show")), user_path(user), :class => 'btn btn-default btn-xs' %>
+
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+    <div class="emphasis">
+        <p><small> </small></p>
+        <%= link_to 'Connect Mail', '/auth/google', class: "btn btn-info btn-block", style: 'color: #ffff;' %>
+    </div>
+<% end %>

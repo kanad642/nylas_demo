@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= content_for?(:title) ? yield(:title) : "NylasDemo" %></title>
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag "application", :media => "all" %>
+    <%= javascript_include_tag "application" %>
+    <link rel="icon" type="image/jpeg" href="/download.jpeg">
+  </head>
+  <body>
+    <div class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/">NylasDemo</a>
+
+      </div>
+    </div>
+
+    <div class="container margin-top-100">
+      <div class="row">
+          <%= bootstrap_flash %>
+          <%= yield %>
+      </div><!--/row-->
+    </div> <!-- /container -->
+
+  </body>
+</html>
