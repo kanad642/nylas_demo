@@ -17,6 +17,8 @@ ActiveRecord::Schema.define(version: 20200502152540) do
     t.text     "raw_email",  limit: 65535
     t.string   "from"
     t.string   "mail_date"
+    t.integer  "user_id"
+    t.string   "snippet"
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
   end

@@ -23,8 +23,18 @@ class UsersController < ApplicationController
   end
 
   def mail_details
-    #binding.pry
+    # binding.pry
     @user = User.find(params[:user_id])
+    messages = nylas(@user.nylas_token).messages.limit(10)
+
+    # from = message.from.first.attributes.data.registry_data[:email]
+    # id = message.id
+    # subject = message.subject
+    # snippet = message.snippet
+    # body = message.body
+
+
+
   end
 
   # POST /users

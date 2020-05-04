@@ -5,6 +5,8 @@ class CreateMails < ActiveRecord::Migration[5.0]
       t.text :raw_email
       t.string :from
       t.string :mail_date
+      t.integer :user_id
+      t.string :snippet
 
       t.timestamps
     end
